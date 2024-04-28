@@ -23,4 +23,4 @@ docker container exec -it postgres_db sh (Connect to Container)
  - psql -U Postgres (login with user)
  - \du (Shows Db, Roles)
  - \l (Show DB)
- - 
+
