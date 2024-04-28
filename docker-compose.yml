@@ -43,6 +43,7 @@ services:
 volumes:
   data:
 
+
 networks:
   wpnet:
     driver: bridge
