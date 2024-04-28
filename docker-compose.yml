@@ -1,0 +1,48 @@
+version: '3.9'
+
+services:
+  idm:
+    container_name: idm.7.2.1
+    image: msabuncuo/idm:7.2.1
+    restart: always
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+    networks:
+      - wpnet
+
+  postgres:
+    container_name: postgres_db
+    image: postgres:12
+    restart: always
+    environment:
+        - POSTGRES_USER=postgres
+        - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - wpnet
+
+    volumes:
+      - data:/var/lib/postgresql/data
+
+  pg-admin:
+   image: dpage/pgadmin4:6
+   restart: always
+   environment:
+     - PGADMIN_DEFAULT_EMAIL=admin@email.com
+     - PGADMIN_DEFAULT_PASSWORD=admin
+     - PGADMIN_LISTEN_PORT=5050
+
+   ports:
+     - "5050:5050"
+   networks:
+     - wpnet
+
+volumes:
+  data:
+
+networks:
+  wpnet:
+    driver: bridge
